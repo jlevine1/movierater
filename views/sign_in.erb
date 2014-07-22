@@ -1,0 +1,10 @@
+<%=flash[:message] if flash[:message]%>
+<form method="POST" action="/sign-in-process">
+	<label for="username">Username: </label>
+	<input type="text" name="username">
+
+	<label for="password">Password: </label>
+	<input type="password" name="password">
+
+	<input type="submit" name="submit" value="Login">
+</form>

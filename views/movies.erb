@@ -1,0 +1,10 @@
+<ul>
+	<% @movie.each do |n|%>
+		<a href="/movie/<%=n.id%>"><div><li>
+			<h1> <%=n.title%></h1>
+			<h2><%=n.rating%> stars</h2>
+			<img src="<%=n.avatar.url%>" height="200px" width="150px"/>
+			<p>Rated by <%=User.find(n.user_id).username%></p>
+		</li></div></a>
+	<%end%>
+</ul>

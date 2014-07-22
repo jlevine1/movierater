@@ -1,0 +1,32 @@
+<div>
+	<li>
+		<h1> <%=@movie.title%></h1>
+		<h2><%=@movie.rating%> stars</h2>
+		<img src="<%=@movie.avatar.url%>" height="200px" width="150px"/>
+		<p>Rated by <%=User.find(@movie.user_id).username%></p>
+	</li>
+</div>
+
+</br>
+<ul>
+	<%if Post.all.first%>
+	<% Post.where(movie_id: @movie.id).each do |n| %>
+		<li>
+			<h1> <%=n.author%> </h1>
+			<h2> <%=n.data%> </h2>
+		</li>
+	<%end%>
+	<%end%>
+</ul>
+
+</br>
+
+<div>
+<textarea rows="4" cols="50" name="content" form="post" placeholder="Enter text here">
+</textarea>
+
+<form method="POST" action="/post-process" id="post">
+	<%=@movie.id%><input type="hidden" name="movie_id" value="<%=@movie.id%>">
+	<input type="submit">
+</form>
+</div>
