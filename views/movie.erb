@@ -62,21 +62,21 @@
 	<div></br>
 		<%current_movie_page = Movie.find(params[:id])
 		<div><a href="/movies"><div id="btn2">Back To Movie List</div></a></div>
-		<h1> <%=@movie.title%></h1>
-		<h2><%=@movie.rating%> stars</h2>
+		<h1> <%=current_movie_page.title%></h1>
+		<h2><%=current_movie_page.rating%> stars</h2>
 		<img src="<%=@movie.avatar.url%>" height="400px" width="300px"/>
-		<h3><%=@movie.review%></h3>
-		Rated by <%=User.find(@movie.user_id).username%>
+		<h3><%=current_movie_page.review%></h3>
+		Rated by <%=User.find(current_movie_page.user_id).username%>
 		</br>
-		<%if User.find(@movie.user_id).id==session[:user_id]%>
+		<%if User.find(current_movie_page.user_id).id==session[:user_id]%>
 			<div>
-				<a href="/delete-review/<%=@movie.id%>">Delete Review</a>
+				<a href="/delete-review/<%=current_movie_pageid%>">Delete Review</a>
 			</div>
 		<%end%>
-		<% i = 0
-				MovieLikes.where(movie_id:@movie.id).each do |t|
-					i= i+1;
-				end %>
+		<% i = 0%>
+				<%MovieLikes.where(movie_id:@movie.id).each do |t|%>
+					<%i= i+1%>
+				<%end %>
 				<% if @liked_movies.include? @movie.id %>
 					<a href="/munlike/<%=@movie.id%>">Unlike this Review</a>
 				<% else %> 
