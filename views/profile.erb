@@ -122,7 +122,7 @@ Favorite Movie: <%=@current_profile.fav_movie%>
 				<p><%=n.data%> </p>
 	<%end%>
 	<div>
-		<textarea rows="4" cols="50" name="content" form="profilepost" placeholder="Enter text here"></textarea>
+		<textarea maxlength="150" rows="4" cols="50" name="content" form="profilepost" placeholder="Enter text here"></textarea>
 			<form method="POST" action="/profile-post-process/<%=@user.id%>" id="profilepost">
 				<input type="hidden" name="profile_id" value="<%=@profile.id%>">
 				<input type="submit">
