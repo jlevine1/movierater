@@ -75,25 +75,41 @@ Favorite Movie: <%=@current_profile.fav_movie%>
 </p>
 <div>
 		<div id="red"><h1>Recent Rated Movies</h1></div>
-			<% @recent_review.reverse.each do |n|%>
-				<div id="title">
-					<h4>
-						<a href="/movie/<%=n.id%>">
-							<%=n.title%> 
-						</a>
-					</h4>
-				<a href="/movie/<%=n.id%>">
-					<img src="<%=n.avatar.url%>" height="200px" width="150px"/>
-				</a>
-				</div>
-				<h5> <%=n.review %> </h5>
+			<% if @recent_movie != [] %>
+				<%i=0
+					@recent_review.reverse.each do |n|%>
+						<%if i<2
+							i= i+1%>
+							<div id="title">
+								<h4>
+									<a href="/movie/<%=n.id%>">
+										<%=n.title%> 
+									</a>
+								</h4>
+							<a href="/movie/<%=n.id%>">
+								<img src="<%=n.avatar.url%>" height="200px" width="150px"/>
+							</a>
+							</div>
+							<h5> <%=n.review %> </h5>
+						<%end%>
+					<%end%>
+				<%else%>
+				<h4 style="color:white;">None</h4>
 			<%end%>
 </div>
 <div>
 	<div id="red"><h1>Recent Posts</h1></div>
-		<% @recent_post.reverse.each do |n|%>
-			"<%=n.data %>" -<%=n.author%>
-		<%end%>
+		<% if @recent_post != [] %>
+			<%i=0
+				@recent_post.reverse.each do |n|%>
+					<%if i<2
+						i= i+1%>
+					<%end%>
+					"<%=n.data %>" -<%=n.author%>
+				<%end%>
+			<%else%>
+				<h4 style="color:white;">None</h4>
+			<%end%>
 </div>
 </br>
 <h1>Comments:</h1>
