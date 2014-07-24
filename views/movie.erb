@@ -77,7 +77,7 @@
 				<%MovieLikes.where(movie_id:@movie.id).each do |t|%>
 					<%i= i+1%>
 				<%end %>
-				<% if @liked_movies.include? @movie.id %>
+				<% if @liked_movies.include? t.id %>
 					<a href="/munlike/<%=@movie.id%>">Unlike this Review</a>
 				<% else %> 
 					<a href="/mlike/<%=@movie.id%>">Like this Review</a>
