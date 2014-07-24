@@ -14,14 +14,15 @@
 				<%i=0
 				@mlikes.reverse.each do|n|
 					if i<2%>
-						<h4>
-							<a href="/movie/<%=Movie.find(n.movie_id).id%>">
-								<%=Movie.find(n.movie_id).title%>
+						<h4><%@movie = Movie.find(n.movie_id)%>
+							<a href="/movie/<%=@movie.id%>">
+								<%=@movie.title%>
 							</a>
 						</h4>
+						</a>
 						<div id="User_id">
-							<a href="/user/<%=User.find(n.user_id).id%>">
-								<h5>By <%=User.find(n.user_id).username%></h5>
+							<a href="/user/<%=User.find(@movie.user_id).id%>">
+								<h5>By <%=User.find(@movie.user_id).username%></h5>
 							</a>
 						</div>
 						<%i=i+1%>
@@ -38,7 +39,7 @@
 			if i<2%>
 				<div id="post"><h4><%=Post.find(n.post_id).data%></h4></div>
 				<div id="User_id">
-					<a href="/user/<%=User.find(n.user_id).id%>">
+					<a href="/user/<%=User.find(Post.find(n.post_id).user_id).id%>">
 						<h5>By <%=Post.find(n.post_id).author%></h5>
 					</a>
 			<%end%>
