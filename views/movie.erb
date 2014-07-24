@@ -70,7 +70,7 @@
 		</br>
 		<%if User.find(current_movie_page.user_id).id==session[:user_id]%>
 			<div>
-				<a href="/delete-review/<%=current_movie_pageid%>">Delete Review</a>
+				<a href="/delete-review/<%=current_movie_page.id%>">Delete Review</a>
 			</div>
 		<%end%>
 		<% i = 0%>
