@@ -13,7 +13,7 @@
 			<% if @mlikes != [] %>
 				<%i=0
 				@mlikes.reverse.each do|n|
-					if i<=2%>
+					if i<2%>
 						<h4>
 							<a href="/movie/<%=Movie.find(n.movie_id).id%>">
 								<%=Movie.find(n.movie_id).title%>
@@ -34,7 +34,7 @@
 	<% if @plikes != [] %>
 		<%i=0
 		@plikes.reverse.each do |n|
-			if i<=2%>
+			if i<2%>
 				<div id="post"><h4><%=Post.find(n.post_id).data%></h4></div>
 				<div id="User_id">
 					<a href="/user/<%=User.find(n.user_id).id%>">
