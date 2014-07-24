@@ -166,13 +166,14 @@ get '/delete-account' do
 	Movie.destroy(n.id)
 	end
 
+	session.clear
 	redirect '/sign-in'
 end
 
 get '/delete-post/:id' do
 	Post.destroy(params[:id])
 
-	a = PostLikes.where(params[:id])
+	a = PostLikes.where(post_id: params[:id])
 	a.each do |n|
 	PostLikes.destroy(n.id)
 	end
@@ -188,9 +189,13 @@ get '/delete-review/:id' do
 	MovieLikes.destroy(n.id)
 	end
 
-	a=PostLikes.where(movie_id: params[:id])
-	a.each do|n|
-	PostLikes.destroy(n.id)
+	a=Post.where(movie_id: params[:id])
+	a.each do |n|
+		b=PostLikes.where(post_id: a.id)
+		b.each do|n|
+			PostLikes.destroy(n.id)
+		end
+		Post.destroy(n.id)
 	end
 	redirect '/movies'
 end
