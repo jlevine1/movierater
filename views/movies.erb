@@ -68,6 +68,8 @@
 		Recently Rated Movies
 	</h1>
 	<% if @movie.blank? %>
+		<h4>None</h4>
+	<%else%>
 		<%@movie=Movie.all%>
 			<%@movie.reverse.each do |n|%>
 			<div>
@@ -86,8 +88,6 @@
 				</p>
 			</div>
 		<%end%>
-	<%else%>
-		<h4>None</h4>
 	<%end%>
 	</p>	
 	</div></center>
