@@ -75,11 +75,12 @@ Favorite Movie: <%=@current_profile.fav_movie%>
 </p>
 <div>
 		<div id="red"><h1>Recent Rated Movies</h1></div>
-			<% if @recent_movie != [] %>
+			<% if @recent_review != [] %>
 				<%i=0
 					@recent_review.reverse.each do |n|%>
 						<%if i<2
 							i= i+1%>
+						<%end%>
 							<div id="title">
 								<h4>
 									<a href="/movie/<%=n.id%>">
@@ -91,9 +92,8 @@ Favorite Movie: <%=@current_profile.fav_movie%>
 							</a>
 							</div>
 							<h5> <%=n.review %> </h5>
-						<%end%>
 					<%end%>
-				<%else%>
+			<%else%>
 				<h4 style="color:white;">None</h4>
 			<%end%>
 </div>
