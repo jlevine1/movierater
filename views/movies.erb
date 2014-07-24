@@ -67,23 +67,27 @@
 	<h1>
 		Recently Rated Movies
 	</h1>
-	<%@movie=Movie.all%>
-		<%@movie.reverse.each do |n|%>
-		<div>
-			<h2>
+	<% if @movie.blank? %>
+		<%@movie=Movie.all%>
+			<%@movie.reverse.each do |n|%>
+			<div>
+				<h2>
+					<a href="/movie/<%=n.id%>">
+						<%=n.title%></a>
+				</h2>
+				</a><h3><%=n.rating%> stars</h3>
 				<a href="/movie/<%=n.id%>">
-					<%=n.title%></a>
-			</h2>
-			</a><h3><%=n.rating%> stars</h3>
-			<a href="/movie/<%=n.id%>">
-				<img src="<%=n.avatar.url%>" height="200px" width="150px"/>
-			</a>
-			<p>
-				<a href="/user/<%=User.find(n.user_id).id%>">
-					Rated by <%=User.find(n.user_id).username%>
+					<img src="<%=n.avatar.url%>" height="200px" width="150px"/>
 				</a>
-			</p>
-		</div>
+				<p>
+					<a href="/user/<%=User.find(n.user_id).id%>">
+						Rated by <%=User.find(n.user_id).username%>
+					</a>
+				</p>
+			</div>
+		<%end%>
+	<%else%>
+		<h4>None</h4>
 	<%end%>
 	</p>	
 	</div></center>
