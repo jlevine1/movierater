@@ -78,9 +78,9 @@
 					<%i= i+1%>
 				<%end%>
 				<% if @liked_movies.include? current_movie_page.id %>
-					<a href="/munlike/<%=current_movie.id%>">Unlike this Review</a>
+					<a href="/munlike/<%=current_movie_page.id%>">Unlike this Review</a>
 				<% else %> 
-					<a href="/mlike/<%=current_movie.id%>">Like this Review</a>
+					<a href="/mlike/<%=current_movie_page.id%>">Like this Review</a>
 				<%end%>
 				</br>
 				<% if i == 1 %> 
