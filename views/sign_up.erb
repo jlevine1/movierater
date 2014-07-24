@@ -1,16 +1,37 @@
-<%=flash[:message] if flash[:message]%>
+<div id="wrapper">
+</br>
+	<center><div id="header">All You Need is Popcorn</div></center>
+	<div id="popcorn"></div>
+	<div id="popcorn3"></div>
+</div>
+</br>
+</br>
+</br>
+<center><div id="add_movie">
+</br>
 <form method="POST" action="/sign-up-process">
+	<%="<div style='color:red; font-size:18px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#{flash[:message]}</div>" if flash[:message]%>
 	<label for="fav_movie">Favorite Movie</label>
-	<input type="text" name="fav_movie">
+	<input type required="text" name="fav_movie">
 </br>
-	<label for="email">E-Mail</label>
-	<input type="email" name="email">
 </br>
-	<label for="username">Username</label>
-	<input type="text" name="username">
+	<label for="email">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E-Mail</label>
+	<input type="email" required name="email">
 </br>
-	<label for="password">Password</label>
-	<input type="password" name="password">
 </br>
-	<input type="submit" name="submit" value="Create Account">
+	<label for="username">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Username</label>
+	<input type="text" required name="username">
+</br>
+</br>
+	<label for="password">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password</label>
+	<input type="password" required name="password">
+</br>
+</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="submit" value="Create Account">
+</br>
+</br>
 </form>
+</div></center>
+<div id="popcorn4"></div>
+<div id="popcorn1"></div>
+<div id="popcorn2"></div>

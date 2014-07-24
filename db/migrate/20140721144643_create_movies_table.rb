@@ -4,6 +4,7 @@ class CreateMoviesTable < ActiveRecord::Migration
   		t.string :title
   		t.string :rating
   		t.string :avatar
+  		t.string :review
   		t.integer :user_id
   	end
   end

@@ -11,12 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140721144643) do
+ActiveRecord::Schema.define(version: 20140723135315) do
+
+  create_table "movie_likes", force: true do |t|
+    t.integer "user_id"
+    t.integer "movie_id"
+  end
 
   create_table "movies", force: true do |t|
     t.string  "title"
     t.string  "rating"
     t.string  "avatar"
+    t.string  "review"
     t.integer "user_id"
   end
 
@@ -31,6 +37,14 @@ ActiveRecord::Schema.define(version: 20140721144643) do
     t.datetime "created_at"
     t.integer  "user_id"
     t.integer  "movie_id"
+  end
+
+  create_table "profile_posts", force: true do |t|
+    t.string   "data"
+    t.string   "author"
+    t.datetime "created_at"
+    t.integer  "user_id"
+    t.integer  "profile_id"
   end
 
   create_table "profiles", force: true do |t|

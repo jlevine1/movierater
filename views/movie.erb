@@ -1,32 +1,129 @@
-<div>
-	<li>
+<link rel="stylesheet" type="text/css" href="../styles/desktop.css">
+<div id="wrapper">
+	</br><a href="/sign-out">
+		<button type="button" name="" value="" class="css3button">Logout</button>
+	</a>
+	<center><div id="header">All You Need is Popcorn</div></center>
+	<a href="/movies"><div id="popcorn"></div></a>
+	<a href="/movies"><div id="popcorn3"></div></a>
+</div>
+<div id="lside">
+	<center>
+	</br>
+		Recently Liked Reviews:
+			<% if @mlikes != [] %>
+				<%i=0
+				@mlikes.reverse.each do|n|
+					if i<=2%>
+						<h4>
+							<a href="/movie/<%=Movie.find(n.movie_id).id%>">
+								<%=Movie.find(n.movie_id).title%>
+							</a>
+						</h4>
+						<div id="User_id">
+							<a href="/user/<%=User.find(n.user_id).id%>">
+								<h5>By <%=User.find(n.user_id).username%></h5>
+							</a>
+						</div>
+						<%i=i+1%>
+					<%end%>
+				<%end%>
+			<%else%>
+				<h4>None</h4>
+			<%end%>
+
+		Recently Liked Posts:
+	<% if @plikes != [] %>
+		<%i=0
+		@plikes.reverse.each do |n|
+			if i<=2%>
+				<div id="post"><h4><%=Post.find(n.post_id).data%></h4></div>
+				<div id="User_id">
+					<a href="/user/<%=User.find(n.user_id).id%>">
+						<h5>By <%=Post.find(n.post_id).author%></h5>
+					</a>
+			<%end%>
+		<%end%>
+		<%else%>
+			<h4>None</h4>
+		<%end%>
+	</center>
+</div>
+<div id="rside"><center><div id="user"></br>Current User:</div></center><p><center><%=@current_user.username%>
+</br>
+	<%=@profile.email%></center></p>
+	<center><a href="/user/<%=User.find(session[:user_id]).id%>">My Profile</a>
+	</div></center></div>
+	<center><div id="user"></br>Current User:</div></center><p><center><%=@current_user.username%>
+</br>
+	<%=@profile.email%></center></p>
+<center><div id="content">
+	<div></br>
+		<div><a href="/movies"><div id="btn2">Back To Movie List</div></a></div>
 		<h1> <%=@movie.title%></h1>
 		<h2><%=@movie.rating%> stars</h2>
-		<img src="<%=@movie.avatar.url%>" height="200px" width="150px"/>
-		<p>Rated by <%=User.find(@movie.user_id).username%></p>
-	</li>
-</div>
-
-</br>
-<ul>
-	<%if Post.all.first%>
-	<% Post.where(movie_id: @movie.id).each do |n| %>
-		<li>
-			<h1> <%=n.author%> </h1>
-			<h2> <%=n.data%> </h2>
-		</li>
+		<img src="<%=@movie.avatar.url%>" height="400px" width="300px"/>
+		<h3><%=@movie.review%></h3>
+		Rated by <%=User.find(@movie.user_id).username%>
+		</br>
+		<%if User.find(@movie.user_id).id==session[:user_id]%>
+			<div>
+				<a href="/delete-review/<%=@movie.id%>">Delete Review</a>
+			</div>
+		<%end%>
+		<% i = 0
+				MovieLikes.where(movie_id:@movie.id).each do |t|
+					i= i+1;
+				end %>
+				<% if @liked_movies.include? @movie.id %>
+					<a href="/munlike/<%=@movie.id%>">Unlike this Review</a>
+				<% else %> 
+					<a href="/mlike/<%=@movie.id%>">Like this Review</a>
+				<%end%>
+				</br>
+				<% if i == 1 %> 
+					<%=i%> like
+				<% else %>
+					<%=i%> likes 
+				<%end%>
+	</div>
+	<h1>Comments:</h1>
+	<% Post.where(movie_id:@movie.id).each do |n| %>
+			<h2 style="text-align:left; margin-left:7px">
+				<a href="/user/<%=User.find(n.user_id).id%>">
+					<%=n.author%> 
+				</a>
+			</h2>
+			<div style="text-align:left; margin-left:7px"><%=n.data%></div>&nbsp;
+			<% i = 0
+				PostLikes.where(post_id:n.id).each do |n|
+					i= i+1;
+				end %>
+				<% if @liked_posts.include? n.id %>
+					<p style="text-align:left; margin-left:7px"><a  href="/punlike/<%=n.id%>">Unlike</a></p>
+				<% else %> 
+					<div style="text-align:left; margin-left:7px"><a  href="/plike/<%=n.id%>">Like This Post</a></div>
+				<%end%>
+				<% if i == 1 %> 
+					<p style="text-align:left; margin-left:7px"> <%=i%> like </p>
+				<% else %>
+					<p style="text-align:left; margin-left:7px"> <%=i%> likes </p>
+				<%end%>
+				<%if User.find(n.user_id).id==session[:user_id]%>
+					<div style="text-align:left; margin-left:7px">
+						<a href="/delete-post/<%=n.id%>">Delete Post</a>
+					</div>
+				<%end%>
+				<hr>
 	<%end%>
-	<%end%>
-</ul>
-
-</br>
-
 <div>
-<textarea rows="4" cols="50" name="content" form="post" placeholder="Enter text here">
+<textarea rows="4" cols="50" name="content" form="movieposts" placeholder="Enter text here">
 </textarea>
 
-<form method="POST" action="/post-process" id="post">
-	<%=@movie.id%><input type="hidden" name="movie_id" value="<%=@movie.id%>">
+<form method="POST" action="/post-process" id="movieposts">
+	<input type="hidden" name="movie_id" value="<%=@movie.id%>">
 	<input type="submit">
 </form>
+</br>
 </div>
+</div></center>

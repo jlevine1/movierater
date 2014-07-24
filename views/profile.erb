@@ -1,5 +1,116 @@
-Username: <%=@current_user.username%>
+<link rel="stylesheet" type="text/css" href="../styles/desktop.css">
+<div id="wrapper">
+	</br><a href="/sign-out">
+		<button type="button" name="" value="" class="css3button">Logout</button>
+	</a>
+	<center><div id="header">All You Need is Popcorn</div></center>
+	<a href="/movies"><div id="popcorn"></div></a>
+	<a href="/movies"><div id="popcorn3"></div></a>
+</div>
+<div id="lside">
+	<center>
+	</br>
+		Recently Liked Reviews:
+			<% if @mlikes != [] %>
+				<%i=0
+				@mlikes.reverse.each do|n|
+					if i<=2%>
+						<h4>
+							<a href="/movie/<%=Movie.find(n.movie_id).id%>">
+								<%=Movie.find(n.movie_id).title%>
+							</a>
+						</h4>
+						</a>
+						<div id="User_id">
+							<a href="/user/<%=User.find(n.user_id).id%>">
+								<h5>By <%=User.find(n.user_id).username%></h5>
+							</a>
+						</div>
+						<%i=i+1%>
+					<%end%>
+				<%end%>
+			<%else%>
+				<h4>None</h4>
+			<%end%>
+
+		Recently Liked Posts:
+	<% if @plikes != [] %>
+		<%i=0
+		@plikes.reverse.each do |n|
+			if i<=2%>
+				<div id="post"><h4><%=Post.find(n.post_id).data%></h4></div>
+				<div id="User_id">
+					<a href="/user/<%=User.find(n.user_id).id%>">
+						<h5>By <%=Post.find(n.post_id).author%></h5>
+					</a>
+			<%end%>
+		<%end%>
+		<%else%>
+			<h4>None</h4>
+		<%end%>
+	</center>
+</div>
+<div id="rside"><center><div id="user"></br>Current User:</div></center><p><center><%=@current_user.username%>
+</br>
+	<%=@profile.email%></center></p>
+	<center><a href="/user/<%=User.find(session[:user_id]).id%>">My Profile</a>
+	</div></center></div>
+	<center><div id="user"></br>Current User:</div></center><p><center><%=@current_user.username%>
+</br>
+	<%=@profile.email%></center></p>
+<center><div id="content">
+</br>
+<a href="/movies"><div id="btn5">Back To Home Page</div></a>
+<p><div id="red"><h1><%=User.find_by_id(params[:id]).username%>'s Profile</h1></div></p>
+<p>
+Username: &nbsp; <%=@user.username%>
+</br>
+Email: &nbsp; <%=@current_profile.email%>
 </br>
 Favorite Movie: <%=@current_profile.fav_movie%>
 </br>
-Email: <%=@current_profile.email%>
+	<%if @current_user.id==@user.id%>
+<div><a href="/edit-profile"><div id="btn">Edit Information</div></a></div>
+	<%end%>
+</p>
+<div>
+		<div id="red"><h1>Recent Rated Movies</h1></div>
+			<% @recent_review.reverse.each do |n|%>
+				<div id="title">
+					<h4>
+						<a href="/movie/<%=n.id%>">
+							<%=n.title%> 
+						</a>
+					</h4>
+				<a href="/movie/<%=n.id%>">
+					<img src="<%=n.avatar.url%>" height="200px" width="150px"/>
+				</a>
+				</div>
+				<h5> <%=n.review %> </h5>
+			<%end%>
+</div>
+<div>
+	<div id="red"><h1>Recent Posts</h1></div>
+		<% @recent_post.reverse.each do |n|%>
+			"<%=n.data %>" -<%=n.author%>
+		<%end%>
+</div>
+</br>
+<h1>Comments:</h1>
+	<% ProfilePosts.where(user_id:@user.id).each do |n| %>
+			<h2>
+				<a href="/user/<%=User.find(n.user_id).id%>">
+					<%=n.author%> 
+				</a>
+			</h2>
+				<p><%=n.data%> </p>
+	<%end%>
+	<div>
+		<textarea rows="4" cols="50" name="content" form="profilepost" placeholder="Enter text here"></textarea>
+			<form method="POST" action="/profile-post-process/<%=@user.id%>" id="profilepost">
+				<input type="hidden" name="profile_id" value="<%=@profile.id%>">
+				<input type="submit">
+			</form>
+			</br>
+	</div>
+</div></center>
