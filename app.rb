@@ -189,7 +189,7 @@ get '/delete-review/:id' do
 	MovieLikes.destroy(n.id)
 	end
 
-	a=Post.where(movie_id: params[:id])
+	a=Post.where(movie_id: params[:post_id])
 	a.each do |n|
 		b=PostLikes.where(post_id: a.id)
 		b.each do|n|
