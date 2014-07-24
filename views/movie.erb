@@ -74,9 +74,10 @@
 			</div>
 		<%end%>
 		<% i = 0%>
-				<%MovieLikes.where(movie_id:@movie.id).each do |t|%>
+				<%MovieLikes.where(movie_id:current_movie_page.id).each do |t|%>
 					<%i= i+1%>
-				<% if @liked_movies.include? t.id %>
+				<%end%>
+				<% if @liked_movies.include? current_movie_page.id %>
 					<a href="/munlike/<%=@movie.id%>">Unlike this Review</a>
 				<% else %> 
 					<a href="/mlike/<%=@movie.id%>">Like this Review</a>
@@ -87,10 +88,9 @@
 				<% else %>
 					<%=i%> likes 
 				<%end%>
-			<%end%>
 	</div>
 	<h1>Comments:</h1>
-	<% Post.where(movie_id:@movie.id).each do |n| %>
+	<% Post.where(movie_id:current_movie_page.id).each do |n| %>
 			<h2 style="text-align:left; margin-left:7px">
 				<a href="/user/<%=User.find(n.user_id).id%>">
 					<%=n.author%> 
@@ -100,6 +100,7 @@
 			<% i = 0%>
 				<%PostLikes.where(post_id:n.id).each do |n|%>
 					<%i= i+1;%>
+				<%end%>
 				<% if @liked_posts.include? n.id %>
 					<p style="text-align:left; margin-left:7px"><a  href="/punlike/<%=n.id%>">Unlike</a></p>
 				<% else %> 
@@ -116,7 +117,6 @@
 					</div>
 				<%end%>
 				<hr>
-			<%end%>
 	<%end%>
 <div>
 <textarea rows="4" cols="50" name="content" form="movieposts" placeholder="Enter text here">
