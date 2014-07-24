@@ -60,7 +60,7 @@
 	<%=@profile.email%></center></p>
 <center><div id="content">
 	<div></br>
-		<%current_movie_page = Movie.find(params[:id])
+		<%current_movie_page = Movie.find(params[:id])%>
 		<div><a href="/movies"><div id="btn2">Back To Movie List</div></a></div>
 		<h1> <%=current_movie_page.title%></h1>
 		<h2><%=current_movie_page.rating%> stars</h2>
