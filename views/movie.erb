@@ -76,7 +76,6 @@
 		<% i = 0%>
 				<%MovieLikes.where(movie_id:@movie.id).each do |t|%>
 					<%i= i+1%>
-				<%end %>
 				<% if @liked_movies.include? t.id %>
 					<a href="/munlike/<%=@movie.id%>">Unlike this Review</a>
 				<% else %> 
@@ -88,6 +87,7 @@
 				<% else %>
 					<%=i%> likes 
 				<%end%>
+			<%end%>
 	</div>
 	<h1>Comments:</h1>
 	<% Post.where(movie_id:@movie.id).each do |n| %>
@@ -97,10 +97,9 @@
 				</a>
 			</h2>
 			<div style="text-align:left; margin-left:7px"><%=n.data%></div>&nbsp;
-			<% i = 0
-				PostLikes.where(post_id:n.id).each do |n|
-					i= i+1;
-				end %>
+			<% i = 0%>
+				<%PostLikes.where(post_id:n.id).each do |n|%>
+					<%i= i+1;%>
 				<% if @liked_posts.include? n.id %>
 					<p style="text-align:left; margin-left:7px"><a  href="/punlike/<%=n.id%>">Unlike</a></p>
 				<% else %> 
@@ -117,6 +116,7 @@
 					</div>
 				<%end%>
 				<hr>
+			<%end%>
 	<%end%>
 <div>
 <textarea rows="4" cols="50" name="content" form="movieposts" placeholder="Enter text here">
