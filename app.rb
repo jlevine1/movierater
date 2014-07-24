@@ -3,7 +3,7 @@ require 'sinatra/activerecord'
 require 'carrierwave'
 require 'carrierwave/orm/activerecord'
 
-configure(:development){set :database, "sqlite3:example3.sqlite3"}
+configure(:development) {set :database, "sqlite3:example3.sqlite3"}
 
 require './models'
 require 'bundler/setup'
@@ -183,9 +183,14 @@ end
 get '/delete-review/:id' do
 	Movie.destroy(params[:id])
 
-	a = MovieLikes.where(params[:id])
+	a = MovieLikes.where(movie_id: params[:id])
 	a.each do |n|
 	MovieLikes.destroy(n.id)
+	end
+
+	a=PostLikes.where(movie_id: params[:id])
+	a.each do|n|
+	PostLikes.destroy(n.id)
 	end
 	redirect '/movies'
 end
