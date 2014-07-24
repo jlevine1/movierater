@@ -65,6 +65,22 @@ body{
 	top:55%;
 	right:42%;
 }
+#popcorn6{
+	width:100px;
+	height:58px;
+	position: absolute;
+	background-image:url(../images/popcorncopy.png);
+	top:23%;
+	right:21%;
+}
+#popcorn7{
+	width:100px;
+	height:58px;
+	position: absolute;
+	background-image:url(../images/popcorncopy.png);
+	top:23%;
+	left:21%;
+}
 #info{
 	padding-left:83.5%;
 	color:white;
