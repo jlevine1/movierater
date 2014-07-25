@@ -42,12 +42,13 @@
 					<a href="/user/<%=User.find(Post.find(n.post_id).user_id).id%>">
 						<h5>By <%=Post.find(n.post_id).author%></h5>
 					</a>
+				<%i=i+1%>
 			<%end%>
 		<%end%>
-		<%else%>
-			<h4>None</h4>
-		<%end%>
-	</center>
+	<%else%>
+		<h4>None</h4>
+	<%end%>
+</center>
 </div>
 <div id="rside"><center><div id="user"></br>Current User:</div></center><p><center><%=@current_user.username%>
 </br>

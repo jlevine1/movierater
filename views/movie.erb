@@ -43,12 +43,13 @@
 					<a href="/user/<%=User.find(Post.find(n.post_id).user_id).id%>">
 						<h5>By <%=Post.find(n.post_id).author%></h5>
 					</a>
+				<%i=i+1%>
 			<%end%>
 		<%end%>
-		<%else%>
-			<h4>None</h4>
-		<%end%>
-	</center>
+	<%else%>
+		<h4>None</h4>
+	<%end%>
+</center>
 </div>
 <div id="rside"><center><div id="user"></br>Current User:</div></center><p><center><%=@current_user.username%>
 </br>
@@ -87,6 +88,7 @@
 					<%=i%> like
 				<% else %>
 					<%=i%> likes 
+	<script language="JavaScript" src="http://www.micropoll.com/a/MicroPoll?id=4378312"></script><noscript><div><a href="http://www.micropoll.com/a/mpview/1230069-4378312">Click Here for Poll</a><BR><a href="http://www.questionpro.com" title="online survey">Online Survey</a><BR><a href="http://www.micropoll.com" title="Polls">Polls</a></a><BR><a href="http://www.micropoll.com/a/MicroPoll?mode=html&id=4378312">View MicroPoll</A></div></noscript><!-- END MICROPOLL JAVASCRIPT CODE --><div style='width:250px; text-align:center;font-family:tahoma;font-size:12px !important;'><a href='http://www.questionpro.com' style='text-decoration:none;color:#444444 !important;' target='_blank'>QuestionPro</a></div>
 				<%end%>
 	</div>
 	<h1>Comments:</h1>
