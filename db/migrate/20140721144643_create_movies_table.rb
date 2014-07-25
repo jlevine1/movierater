@@ -6,6 +6,7 @@ class CreateMoviesTable < ActiveRecord::Migration
   		t.string :avatar
   		t.string :review
   		t.integer :user_id
+  		t.boolean :approved
   	end
   end
 end

@@ -24,6 +24,24 @@ get '/' do
 	redirect '/sign-in'
 end
 
+get '/admin' do
+	current_user
+	if @current_user.admin!=true then redirect "/movies" end
+	erb :admin
+end
+
+get '/approve_review' do
+	@movie=Movie.find(params[:mi])
+	@movie.approved=true
+	@movie.save
+	redirect '/admin'
+end
+
+get '/reject_review' do
+	Movie.find(params[:mi]).destroy
+	redirect '/admin'
+end
+
 get '/sign-in' do
 	erb :sign_in
 end
@@ -128,6 +146,7 @@ post '/add-movie-process' do
 	current_user
 	Movie.create()
 	@movie = Movie.last
+	@movie.approved=false
 	@movie.title=params[:movie_title]
 	@movie.avatar=params[:movie_pic]
 	@movie.rating=params[:stars]

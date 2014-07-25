@@ -1,0 +1,37 @@
+<div id="wrapper">
+	<center><div id="header">All You Need is Popcorn</div></center>
+		<a href="/movies"><div id="popcorn"></div></a>
+		<a href="/movies"><div id="popcorn3"></div></a>
+</div>
+</br>
+</br>
+</br>
+<center><div id="content">
+	<% a=Movie.where(approved: false)%>
+	<% if a.blank? %>
+	No reviews pending
+	<%else%>
+		<%a.reverse.each do |n|%>
+			<div>
+				<h2>
+					<a href="/movie/<%=n.id%>">
+						<%=n.title%></a>
+				</h2>
+				</a><h3><%=n.rating%> stars</h3>
+				<a href="/movie/<%=n.id%>">
+					<img src="<%=n.avatar.url%>" height="200px" width="150px"/>
+				</a>
+				<p>
+					<a href="/user/<%=User.find(n.user_id).id%>">
+						Rated by <%=User.find(n.user_id).username%>
+					</a>
+				</p>
+					<h4><%=n.review%></h4>
+					<%="<a href='/approve_review?mi=#{n.id}'>Approve</a>"%>
+					&nbsp;&nbsp;
+					<%="<a href='/reject_review?mi=#{n.id}'>Reject</a>"%>
+			</div>
+
+			<%end%>
+		<%end%>
+</div></center>

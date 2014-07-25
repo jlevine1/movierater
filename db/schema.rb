@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20140723135315) do
     t.string  "avatar"
     t.string  "review"
     t.integer "user_id"
+    t.boolean "approved"
   end
 
   create_table "post_likes", force: true do |t|
@@ -60,8 +61,9 @@ ActiveRecord::Schema.define(version: 20140723135315) do
   end
 
   create_table "users", force: true do |t|
-    t.string "username"
-    t.string "password"
+    t.string  "username"
+    t.string  "password"
+    t.boolean "admin"
   end
 
 end
