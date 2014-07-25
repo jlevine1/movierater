@@ -9,7 +9,8 @@
 <center><div id="content">
 	<% a=Movie.where(approved: false)%>
 	<% if a.blank? %>
-	No reviews pending
+	</br>
+	<h1 style="color:red;">No reviews pending</h1>
 	<%else%>
 		<%a.reverse.each do |n|%>
 			<div>
